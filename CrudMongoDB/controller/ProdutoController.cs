@@ -1,0 +1,78 @@
+using CrudMongoDB.Models;
+using CrudMongoDB.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CrudMongoDB.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProdutosController : ControllerBase
+    {
+        private readonly ProdutoService _produtoService;
+
+        public ProdutosController(ProdutoService produtoService)
+        {
+            _produtoService = produtoService;
+        }
+
+        // GET: api/Produtos
+        [HttpGet]
+        public async Task<List<Produto>> GetProdutos() =>
+            await _produtoService.GetAsync();
+
+        // GET: api/Produtos/{id}
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<Produto>> Get(string id)
+        {
+            var produto = await _produtoService.GetAsync(id);
+
+            if (produto is null)
+            {
+                return NotFound();
+            }
+
+            return produto;
+        }
+
+        // POST: api/Produtos
+        [HttpPost]
+        public async Task<IActionResult> Post(Produto produto)
+        {
+            await _produtoService.CreateAsync(produto);
+            return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto);
+        }
+
+        // PUT: api/Produtos/{id}
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Produto produto)
+        {
+            var existingProduto = await _produtoService.GetAsync(id);
+
+            if (existingProduto is null)
+            {
+                return NotFound();
+            }
+
+            produto.Id = existingProduto.Id;
+            await _produtoService.UpdateAsync(id, produto);
+
+            return Ok();
+        }
+
+        // DELETE: api/Produtos/{id}
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var produto = await _produtoService.GetAsync(id);
+
+            if (produto is null)
+            {
+                return NotFound();
+            }
+
+            await _produtoService.RemoveAsync(id);
+
+            return NoContent();
+        }
+    }
+}

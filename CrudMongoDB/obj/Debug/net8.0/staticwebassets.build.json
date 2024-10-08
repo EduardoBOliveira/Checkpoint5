@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vGA3q1dzmZYwOYvmr1hQCKrajSkWEylJ+S2dOJ/Z/FY=",
+  "Source": "CrudMongoDB",
+  "BasePath": "_content/CrudMongoDB",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
