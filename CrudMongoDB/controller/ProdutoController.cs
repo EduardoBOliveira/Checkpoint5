@@ -15,12 +15,10 @@ namespace CrudMongoDB.Controllers
             _produtoService = produtoService;
         }
 
-        // GET: api/Produtos
         [HttpGet]
         public async Task<List<Produto>> GetProdutos() =>
             await _produtoService.GetAsync();
 
-        // GET: api/Produtos/{id}
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Produto>> Get(string id)
         {
@@ -34,7 +32,6 @@ namespace CrudMongoDB.Controllers
             return produto;
         }
 
-        // POST: api/Produtos
         [HttpPost]
         public async Task<IActionResult> Post(Produto produto)
         {
@@ -42,7 +39,6 @@ namespace CrudMongoDB.Controllers
             return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto);
         }
 
-        // PUT: api/Produtos/{id}
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Produto produto)
         {
@@ -59,7 +55,6 @@ namespace CrudMongoDB.Controllers
             return Ok();
         }
 
-        // DELETE: api/Produtos/{id}
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
