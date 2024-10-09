@@ -11,5 +11,11 @@ namespace CrudMongoDB.Models
        
         [BsonElement("Nome")]
         public string? Nome { get; set; } = null; 
+
+        [BsonElement("Preco")]
+        public string? Preco { get; set; }
+
+        [BsonElement("Descricao")]
+        public string? Descricao { get; set; } = null; 
     }
 }
